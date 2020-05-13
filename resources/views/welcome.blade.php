@@ -11,12 +11,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
     <body style="height: 100vh;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="w-100 h-20" style="background-color: red;">
-                    <img src="{{ asset('img/header_image.jpg') }}" style="width:100%" alt="Header image">
-                </div>
-            </div>
-        </div>
+        <h1>Mooie welkom pagina over wat deze website doet.</h1>
+        <a href="/home">Klik mij om door te gaan</a>
     </body>
 </html>
