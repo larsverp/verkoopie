@@ -23,4 +23,18 @@ class ProductsController extends Controller
         $product = Products::findOrFail($id);
         return view('product', ['product'=>$product]);
     }
+
+    public function create(Request $request){
+        $ValidateAttributes = request()->validate([
+            'name' => 'required|max:191|string',
+            'description' => 'required',
+            'thumbnail' => 'required|string',
+            'price' => 'required',
+        ]);
+
+        $ValidateAttributes["seller"] = $request->user()->id;
+
+        Products::create($ValidateAttributes);
+        return redirect('/home');
+    }
 }

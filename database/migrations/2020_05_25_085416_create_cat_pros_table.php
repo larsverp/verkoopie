@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CatPro extends Migration
+class CreateCatProsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CatPro extends Migration
      */
     public function up()
     {
-        Schema::create('cat_pro', function (Blueprint $table) {
+        Schema::create('cat_pros', function (Blueprint $table) {
             $table->id();
-            $table->integer('categorie_ID');
-            $table->integer('product_ID');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CatPro extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cat_pro');
+        Schema::dropIfExists('cat_pros');
     }
 }
