@@ -31,9 +31,10 @@ Route::get('product', function () {
 Route::post('product', 'ProductsController@create')
     ->middleware('auth')
     ->name('new_product');
-
 Route::get('myproduct', 'ProductsController@userlist')
     ->middleware('auth')
-    ->name('my_product');
+    ->name('my_products');
+Route::delete('product/{id}', 'ProductsController@remove')
+    ->middleware('auth');
 
 Route::get('/categories', 'CategoriesController@show')->name('home');

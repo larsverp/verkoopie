@@ -37,4 +37,17 @@ class ProductsController extends Controller
         Products::create($ValidateAttributes);
         return redirect('/home');
     }
+
+    public function userlist(Request $request){
+        $products = Products::where('seller', $request->user()->id)->get();
+        return view('userproducts', ['products'=>$products]);
+    }
+
+    public function remove($id, Request $request){
+        $product = Products::where('id', $id)->first();
+        if($product->seller == $request->user()->id){
+            $product->delete();
+            return redirect()->route('my_products');
+        }
+    }
 }
