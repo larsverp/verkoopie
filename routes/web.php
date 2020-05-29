@@ -32,4 +32,8 @@ Route::post('product', 'ProductsController@create')
     ->middleware('auth')
     ->name('new_product');
 
+Route::get('myproduct', 'ProductsController@userlist')
+    ->middleware('auth')
+    ->name('my_product');
+
 Route::get('/categories', 'CategoriesController@show')->name('home');

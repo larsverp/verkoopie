@@ -35,7 +35,7 @@
                 @endguest
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav mr-auto">
-                        <li class="nav-item" role="presentation"><a href="#" class="nav-link">Home</a></li>
+                        <li class="nav-item" role="presentation"><a href="{{ url('/home') }}" class="nav-link">Home</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Categorieën</a>
                             <div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item" role="presentation" href="#">Badspullen</a>
@@ -44,15 +44,20 @@
                                 <a class="dropdown-item" role="presentation" href="#">Zwaarden</a>
                             </div>
                         </li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">Recent</a></li>
+                        <!-- <li class="nav-item" role="presentation"><a class="nav-link" href="#">Recent</a></li> -->
                     </ul>
                     <ul class="nav navbar-nav">
                         <li class="nav-item" role="presentation"><a class="nav-link" href="#">Berichten</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Mijn account</a>
-                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">(Ver)kopen</a><a class="dropdown-item" role="presentation" href="#">Instellingen</a><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" role="presentation" href="{{ route('new_product') }}">Nieuwe verkoop</a>
+                                <a class="dropdown-item" role="presentation" href="{{ route('my_products') }}">Mijn producten</a>
+                                <a class="dropdown-item" role="presentation" href="#">Instellingen</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Uitloggen') }}
-                                </a></div>
+                                </a>
+                            </div>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
