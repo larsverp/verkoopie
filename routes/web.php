@@ -31,10 +31,15 @@ Route::get('product', function () {
 Route::post('product', 'ProductsController@create')
     ->middleware('auth')
     ->name('new_product');
+Route::put('product', 'ProductsController@update')
+    ->middleware('auth')
+    ->name('update_product');
 Route::get('myproduct', 'ProductsController@userlist')
     ->middleware('auth')
     ->name('my_products');
 Route::delete('product/{id}', 'ProductsController@remove')
+    ->middleware('auth');
+Route::get('/product/update/{id}', 'ProductsController@get_update')
     ->middleware('auth');
 
 Route::get('/categories', 'CategoriesController@show')->name('home');

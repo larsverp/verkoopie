@@ -50,4 +50,19 @@ class ProductsController extends Controller
             return redirect()->route('my_products');
         }
     }
+
+    public function get_update($id, Request $request){
+        $product = Products::findOrFail($id);
+        if($request->user()->id == $product->seller){
+            return view('update', ['product'=>$product]);
+        }
+        else{
+            return view('home');
+        }
+        
+    }
+
+    public function update(){
+        
+    }
 }

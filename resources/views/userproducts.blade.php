@@ -16,6 +16,12 @@
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit"> Verwijder </button>
                 </form>
+
+                <form method="get" action="product/update/{{$product->id}}"> 
+                    @csrf
+                    <button type="submit"> Update </button>
+                </form>
+                
             </div>
             @endforeach
         </div>
