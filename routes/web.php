@@ -37,6 +37,8 @@ Route::put('product', 'ProductsController@update')
 Route::get('myproduct', 'ProductsController@userlist')
     ->middleware('auth')
     ->name('my_products');
+Route::get('myproduct/{id}', 'ProductsController@userproduct')
+    ->middleware('auth');
 Route::delete('product/{id}', 'ProductsController@remove')
     ->middleware('auth');
 Route::get('/product/update/{id}', 'ProductsController@get_update')

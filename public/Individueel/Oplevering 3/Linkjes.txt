@@ -1,9 +1,0 @@
-Eigen project git:
-https://github.com/larsverp/verkoopie
-
-
-API voor de proftaak git:
-https://github.com/larsverp/eventhandler-api
-
-Deze API heb ik zelf gebouwd, de git is private vanwege de gevoelige data die er in staat.
-Graag mij een mailtje sturen met github username voor toegang.

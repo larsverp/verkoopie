@@ -16,11 +16,15 @@ class ProductsController extends Controller
 
     public function show(){
         $products = Products::all();
+        foreach($products as $product){
+            $product->price = number_format((float)$product->price, 2, '.', '');
+        }
         return view('home', ['products'=>$products]);
     }
 
     public function index($id){
         $product = Products::findOrFail($id);
+        $product->price = number_format((float)$product->price, 2, '.', '');
         return view('product', ['product'=>$product]);
     }
 
@@ -40,7 +44,18 @@ class ProductsController extends Controller
 
     public function userlist(Request $request){
         $products = Products::where('seller', $request->user()->id)->get();
+        foreach($products as $product){
+            $product->price = number_format((float)$product->price, 2, '.', '');
+        }
         return view('userproducts', ['products'=>$products]);
+    }
+
+    public function userproduct($id, Request $request){
+        $product = Products::where('seller', $request->user()->id)
+                            ->where('id', $id)
+                            ->firstOrFail();
+        $product->price = number_format((float)$product->price, 2, '.', '');
+        return view('update', ['product'=>$product]);
     }
 
     public function remove($id, Request $request){
@@ -62,7 +77,18 @@ class ProductsController extends Controller
         
     }
 
-    public function update(){
-        
+    public function update(Request $request){
+        $ValidateAttributes = request()->validate([
+            'id' => 'int',
+            'name' => 'required|max:191|string',
+            'description' => 'required',
+            'thumbnail' => 'required|string',
+            'price' => 'required',
+        ]);
+        $product = Products::findOrFail($ValidateAttributes["id"]);
+        if($product->seller == $request->user()->id){
+            $product->update($ValidateAttributes);
+            return redirect()->route('my_products');
+        }
     }
 }

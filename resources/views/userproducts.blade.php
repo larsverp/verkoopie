@@ -17,10 +17,7 @@
                     <button type="submit"> Verwijder </button>
                 </form>
 
-                <form method="get" action="product/update/{{$product->id}}"> 
-                    @csrf
-                    <button type="submit"> Update </button>
-                </form>
+                <a href="myproduct/{{$product->id}}">UPDATE</a>
                 
             </div>
             @endforeach
