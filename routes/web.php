@@ -44,4 +44,4 @@ Route::delete('product/{id}', 'ProductsController@remove')
 Route::get('/product/update/{id}', 'ProductsController@get_update')
     ->middleware('auth');
 
-Route::get('/categories', 'CategoriesController@show')->name('home');
+Route::get('/categories/{data}', 'CategoriesController@show')->name('home');
