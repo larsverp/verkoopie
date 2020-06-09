@@ -64,6 +64,10 @@ class ProductsController extends Controller
             $product->delete();
             return redirect()->route('my_products');
         }
+        else if($request->user()->isAdmin){
+            $product->delete();
+            return redirect('/home');
+        }
     }
 
     public function get_update($id, Request $request){
