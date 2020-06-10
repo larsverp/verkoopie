@@ -20,11 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 Auth::routes(['verify' => true]);
 
+# Home routes
 Route::get('/home', 'ProductsController@show')->name('home');
-Route::get('/product/{id}', 'ProductsController@index');
+
+# Authentication routes (These are predifined)
 Route::post('/authenticate', 'Auth\VerificationController@verify')
     ->middleware('auth')
     ->name('verify_me');
+
+# Product routes
+Route::get('/product/{id}', 'ProductsController@index');
 Route::get('product', function () {
     return view('new_product');
 })->middleware('auth');
@@ -34,14 +39,16 @@ Route::post('product', 'ProductsController@create')
 Route::put('product', 'ProductsController@update')
     ->middleware('auth')
     ->name('update_product');
-Route::get('myproduct', 'ProductsController@userlist')
-    ->middleware('auth')
-    ->name('my_products');
-Route::get('myproduct/{id}', 'ProductsController@userproduct')
-    ->middleware('auth');
 Route::delete('product/{id}', 'ProductsController@remove')
     ->middleware('auth');
 Route::get('/product/update/{id}', 'ProductsController@get_update')
     ->middleware('auth');
 
+Route::get('myproduct', 'ProductsController@userlist')
+    ->middleware('auth')
+    ->name('my_products');
+Route::get('myproduct/{id}', 'ProductsController@userproduct')
+    ->middleware('auth');
+
+# Categories routes
 Route::get('/categories/{data}', 'CategoriesController@show')->name('home');

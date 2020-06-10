@@ -4,63 +4,45 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Products;
+use App\Http\Requests;
+use App\Services\CreateProductService as CreateProductService;
 
 class ProductsController extends Controller
 {
-    public function __construct()
-    {
+    public $productService;
 
+    public function __construct() {
         $this->middleware('auth');
-
+        $this->productService = new CreateProductService();
     }
 
-    public function show(){
-        $products = Products::all();
-        foreach($products as $product){
-            $product->price = number_format((float)$product->price, 2, '.', '');
-        }
-        return view('home', ['products'=>$products]);
+    public function show() {
+        return view('home', ['products'=>Products::all()]);
     }
 
-    public function index($id){
-        $product = Products::findOrFail($id);
-        $product->price = number_format((float)$product->price, 2, '.', '');
-        return view('product', ['product'=>$product]);
+    public function index($id) {
+        return view('product', ['product'=>Products::findOrFail($id)]);
     }
 
-    public function create(Request $request){
-        $ValidateAttributes = request()->validate([
-            'name' => 'required|max:191|string',
-            'description' => 'required',
-            'thumbnail' => 'required|string',
-            'price' => 'required',
-        ]);
-
-        $ValidateAttributes["seller"] = $request->user()->id;
-
-        Products::create($ValidateAttributes);
+    public function create(Requests\CreateProductRequest $request) {
+        $this->productService->make($request);
         return redirect('/home');
     }
 
-    public function userlist(Request $request){
-        $products = Products::where('seller', $request->user()->id)->get();
-        foreach($products as $product){
-            $product->price = number_format((float)$product->price, 2, '.', '');
-        }
-        return view('userproducts', ['products'=>$products]);
+    public function userlist(Request $request) {
+        return view('userproducts', ['products'=>Products::where('seller', $request->user()->id)->get()]);
     }
 
-    public function userproduct($id, Request $request){
-        $product = Products::where('seller', $request->user()->id)
-                            ->where('id', $id)
-                            ->firstOrFail();
-        $product->price = number_format((float)$product->price, 2, '.', '');
-        return view('update', ['product'=>$product]);
-    }
-
-    public function remove($id, Request $request){
+    public function userproduct($id, Request $request) {
         $product = Products::where('id', $id)->first();
-        if($product->seller == $request->user()->id){
+        if($product->belongsToMe()){
+            return view('update', ['product'=>$product]);
+        }
+    }
+
+    public function remove($id, Request $request) {
+        $product = Products::where('id', $id)->first();
+        if($product->belongsToMe()){
             $product->delete();
             return redirect()->route('my_products');
         }
@@ -70,9 +52,9 @@ class ProductsController extends Controller
         }
     }
 
-    public function get_update($id, Request $request){
+    public function get_update($id, Request $request) {
         $product = Products::findOrFail($id);
-        if($request->user()->id == $product->seller){
+        if($product->belongsToMe()){
             return view('update', ['product'=>$product]);
         }
         else{
@@ -81,17 +63,10 @@ class ProductsController extends Controller
         
     }
 
-    public function update(Request $request){
-        $ValidateAttributes = request()->validate([
-            'id' => 'int',
-            'name' => 'required|max:191|string',
-            'description' => 'required',
-            'thumbnail' => 'required|string',
-            'price' => 'required',
-        ]);
-        $product = Products::findOrFail($ValidateAttributes["id"]);
-        if($product->seller == $request->user()->id){
-            $product->update($ValidateAttributes);
+    public function update(Requests\UpdateProductRequest $request){
+        $product = Products::findOrFail($request->get('id'));
+        if($product->belongsToMe()){
+            $product->update($request->all());
             return redirect()->route('my_products');
         }
     }

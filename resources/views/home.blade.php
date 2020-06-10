@@ -7,10 +7,17 @@
             <div class="text-center"><input class="form-control" type="text" id="search" onkeyup="search()" placeholder="Hier begint je zoektocht" autocomplete="false"></div>
             <h2 class="text-center">Alle producten</h2>
         </div>
+        Sorteer op:
+        <select onchange="sort()" id="sort">
+            <option value="plh">Prijs Laag -> Hoog</option>
+            <option value="phl">Prijs Hoog -> Laag</option>
+            <option value="pno">Product Nieuw -> Oud</option>
+            <option value="pon">Product Oud -> Nieuw</option>
+        </select>
         <div class="row articles">
             @foreach($products as $product)
             <div class="col-sm-6 col-md-4 item" data-name="{{ $product->name }}"><a href="/product/{{$product->id}}"><img class="img-fluid" style="width:300px;height:260px;object-fit:cover;" src="{{$product->thumbnail}}"></a>
-                <h3 class="name">{{$product->name}} - €{{$product->price}}</h3>
+                <h3 class="name">{{$product->name}} - €{{ number_format((float)$product->price, 2, '.', '') }}</h3>
                 <p class="description">{{ substr($product->description, 0,  250)."..." }}</p><a class="action" href="/product/{{$product->id}}"><i class="fa fa-arrow-circle-right"></i></a>
                 @if(Auth::user()->isAdmin)
                     <form method="post" action="product/{{$product->id}}"> 
@@ -45,8 +52,11 @@
                 foundOne = true;
             }
         });
-
         document.getElementById('nope').hidden = foundOne;
+    }
+
+    function sort(){
+        var sortValue = document.getElementById("sort").value;
     }
 </script>
 @endsection

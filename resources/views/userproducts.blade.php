@@ -9,7 +9,7 @@
         <div class="row articles">
             @foreach($products as $product)
             <div class="col-sm-6 col-md-4 item"><a href="#"><img class="img-fluid" style="width:300px;height:260px;object-fit:cover;" src="{{$product->thumbnail}}"></a>
-                <h3 class="name">{{$product->name}} - €{{$product->price}}</h3>
+                <h3 class="name">{{$product->name}} - €{{number_format((float)$product->price, 2, '.', '')}}</h3>
                 <p class="description">{{ substr($product->description, 0,  250)."..." }}</p>
                 <form method="post" action="product/{{$product->id}}"> 
                     @csrf
