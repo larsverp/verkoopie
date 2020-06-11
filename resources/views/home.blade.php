@@ -9,6 +9,7 @@
         </div>
         Sorteer op:
         <select onchange="sort()" id="sort">
+            <option value="niks">Selecteer iets</option>
             <option value="plh">Prijs Laag -> Hoog</option>
             <option value="phl">Prijs Hoog -> Laag</option>
             <option value="pno">Product Nieuw -> Oud</option>
@@ -57,6 +58,7 @@
 
     function sort(){
         var sortValue = document.getElementById("sort").value;
+        window.location.href = "/home/sort/"+sortValue;
     }
 </script>
 @endsection

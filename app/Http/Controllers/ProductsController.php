@@ -5,19 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Products;
 use App\Http\Requests;
-use App\Services\CreateProductService as CreateProductService;
+use App\Services\CreateProductService;
+use App\Services\SortProductService;
 
 class ProductsController extends Controller
 {
     public $productService;
+    public $productSort;
 
     public function __construct() {
         $this->middleware('auth');
         $this->productService = new CreateProductService();
+        $this->productSort = new SortProductService();
     }
 
-    public function show() {
-        return view('home', ['products'=>Products::all()]);
+    public function show($sort = null) {
+        return view('home', ['products'=>$this->productSort->sort($sort)]);
     }
 
     public function index($id) {

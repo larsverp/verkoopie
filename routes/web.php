@@ -22,6 +22,7 @@ Auth::routes(['verify' => true]);
 
 # Home routes
 Route::get('/home', 'ProductsController@show')->name('home');
+Route::get('/home/sort/{sort?}', 'ProductsController@show')->name('home');
 
 # Authentication routes (These are predifined)
 Route::post('/authenticate', 'Auth\VerificationController@verify')
