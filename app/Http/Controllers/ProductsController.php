@@ -19,8 +19,8 @@ class ProductsController extends Controller
         $this->productSort = new SortProductService();
     }
 
-    public function show($sort = null) {
-        return view('home', ['products'=>$this->productSort->sort($sort)]);
+    public function show(Request $request) {
+        return view('home', ['products'=>$this->productSort->sort($request->input('sort'))]);
     }
 
     public function index($id) {

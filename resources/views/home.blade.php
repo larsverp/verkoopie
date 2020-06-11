@@ -58,7 +58,7 @@
 
     function sort(){
         var sortValue = document.getElementById("sort").value;
-        window.location.href = "/home/sort/"+sortValue;
+        window.location.href = "/home?sort="+sortValue;
     }
 </script>
 @endsection
