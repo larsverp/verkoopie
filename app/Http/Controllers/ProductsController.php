@@ -32,17 +32,6 @@ class ProductsController extends Controller
         return redirect('/home');
     }
 
-    public function userlist(Request $request) {
-        return view('userproducts', ['products'=>Products::where('seller', $request->user()->id)->get()]);
-    }
-
-    public function userproduct($id, Request $request) {
-        $product = Products::where('id', $id)->first();
-        if($product->belongsToMe()){
-            return view('update', ['product'=>$product]);
-        }
-    }
-
     public function remove($id, Request $request) {
         $product = Products::where('id', $id)->first();
         if($product->belongsToMe()){

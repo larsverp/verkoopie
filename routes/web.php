@@ -36,18 +36,21 @@ Route::get('product', function () {
 Route::post('product', 'ProductsController@create')
     ->middleware('auth')
     ->name('new_product');
+
+Route::get('/product/update/{id}', 'ProductsController@get_update')
+    ->middleware('auth');
 Route::put('product', 'ProductsController@update')
     ->middleware('auth')
     ->name('update_product');
+
 Route::delete('product/{id}', 'ProductsController@remove')
     ->middleware('auth');
-Route::get('/product/update/{id}', 'ProductsController@get_update')
-    ->middleware('auth');
 
-Route::get('myproduct', 'ProductsController@userlist')
+# User routes
+Route::get('/user/product', 'UsersController@list')
     ->middleware('auth')
     ->name('my_products');
-Route::get('myproduct/{id}', 'ProductsController@userproduct')
+Route::get('/user/product/{id}', 'UsersController@products')
     ->middleware('auth');
 
 # Categories routes
