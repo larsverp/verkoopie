@@ -18,7 +18,6 @@ class SortProductService
                 return Products::orderBy('created_at', 'asc')->get();
             default:
                 return Products::orderBy('created_at', 'desc')->get();
-        return $products;
         }
     }
 }
