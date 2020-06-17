@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Products;
 use App\Http\Requests;
+use App\Categories;
 use App\Services\CreateProductService;
 use App\Services\SortProductService;
+use PhpParser\Node\Stmt\Catch_;
 
 class ProductsController extends Controller
 {

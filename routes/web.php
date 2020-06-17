@@ -54,4 +54,5 @@ Route::get('/user/product/{id}', 'UsersController@products')
     ->middleware('auth');
 
 # Categories routes
-Route::get('/categories/{data}', 'CategoriesController@show')->name('home');
+Route::get('/categories/{id}', 'CategoriesController@index')
+        ->middleware('auth');

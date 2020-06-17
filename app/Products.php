@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\cat_pro;
+use App\Categories;
 
 class Products extends Model
 {   
@@ -17,6 +19,9 @@ class Products extends Model
         else{
             return false;
         }
-        
+    }
+
+    public function getCategories(){
+        return Categories::find(cat_pro::where('product_id', $this->id)->pluck('category_id'))->all();
     }
 }

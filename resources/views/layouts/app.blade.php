@@ -38,10 +38,9 @@
                         <li class="nav-item" role="presentation"><a href="{{ url('/home') }}" class="nav-link">Home</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Categorieën</a>
                             <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" role="presentation" href="#">Badspullen</a>
-                                <a class="dropdown-item" role="presentation" href="#">Speelgoed</a>
-                                <a class="dropdown-item" role="presentation" href="#">Voertuigen</a>
-                                <a class="dropdown-item" role="presentation" href="#">Zwaarden</a>
+                                @foreach(App\Categories::all() as $categorie)
+                                    <a class="dropdown-item" role="presentation" href="/categories/{{$category->id}}">{{$categorie->name}}</a>
+                                @endforeach
                             </div>
                         </li>
                         <!-- <li class="nav-item" role="presentation"><a class="nav-link" href="#">Recent</a></li> -->
