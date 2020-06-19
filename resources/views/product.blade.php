@@ -11,7 +11,7 @@
                 <p> {{$product->description}}</p>
                 <h2>Categorieën:</h2>
                 @foreach($product->getCategories() as $category)
-                    <p> <a href="/categories/{{$category->id}}">{{$category->name}}</a> </p>
+                <p> <a href="/categories/{{$category->id}}">{{$category->name}}</a> </p>
                 @endforeach
             </div>
         </div>

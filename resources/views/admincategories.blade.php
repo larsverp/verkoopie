@@ -9,16 +9,21 @@
         </div>
         <table border=1 style="width: 100%;">
             <tr>
-                <th>Naam</th><th>Update</th><th>verwijder</th>
+                <th>Naam</th>
+                <th>Update</th>
+                <th>verwijder</th>
             </tr>
             @foreach($categories as $category)
             <tr>
-                <td> {{$category->name}} </td> <td><a href="/categories/update/{{$category->id}}">Update</a></td> 
-                <td><form method="post" action="/categories/{{$category->id}}"> 
-                    @csrf
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit"> Verwijder </button>
-                </form></td>
+                <td> {{$category->name}} </td>
+                <td><a href="/categories/update/{{$category->id}}">Update</a></td>
+                <td>
+                    <form method="post" action="/categories/{{$category->id}}">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit"> Verwijder </button>
+                    </form>
+                </td>
                 </form>
             </tr>
             @endforeach

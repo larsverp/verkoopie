@@ -39,7 +39,7 @@
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Categorieën</a>
                             <div class="dropdown-menu" role="menu">
                                 @foreach(App\Categories::all() as $category)
-                                    <a class="dropdown-item" role="presentation" href="/categories/{{$category->id}}">{{$category->name}}</a>
+                                <a class="dropdown-item" role="presentation" href="/categories/{{$category->id}}">{{$category->name}}</a>
                                 @endforeach
                             </div>
                         </li>
@@ -50,7 +50,7 @@
                                 <a class="dropdown-item" role="presentation" href="{{ route('new_product') }}">Nieuwe verkoop</a>
                                 <a class="dropdown-item" role="presentation" href="{{ route('my_products') }}">Mijn producten</a>
                                 @if(Auth::user()->isAdmin)
-                                    <a class="dropdown-item" role="presentation" href="{{ route('categories') }}">Categorieën</a>
+                                <a class="dropdown-item" role="presentation" href="{{ route('categories') }}">Categorieën</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

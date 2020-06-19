@@ -22,25 +22,27 @@
                 <p class="description">{{ substr($product->description, 0,  250)."..." }}</p>
                 <p> |
                     @foreach($product->getCategories() as $category)
-                        <a href="/categories/{{$category->id}}">{{$category->name}}</a> |
+                    <a href="/categories/{{$category->id}}">{{$category->name}}</a> |
                     @endforeach
                 </p>
                 @if(Auth::user()->isAdmin)
-                    <form method="post" action="product/{{$product->id}}"> 
-                        @csrf
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit"> Verwijder </button>
-                    </form>
+                <form method="post" action="product/{{$product->id}}">
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit"> Verwijder </button>
+                </form>
                 @endif
             </div>
             @endforeach
         </div>
-        <div class="intro" id="nope" hidden="true"><h5 class="text-center">Helaas hebben we niet gevonden wat je zoekt :(</h5></div>
+        <div class="intro" id="nope" hidden="true">
+            <h5 class="text-center">Helaas hebben we niet gevonden wat je zoekt :(</h5>
+        </div>
     </div>
 </div>
 
 <script>
-    function search(){
+    function search() {
         var data = document.querySelectorAll('.row.articles > *');
         var searchTerm = document.getElementById('search').value;
         var foundOne = false;
@@ -51,19 +53,18 @@
             var name = product.getAttribute('data-name');
             var matchSearchTerm = new RegExp(searchTerm, 'i');
 
-            if (!name.match(matchSearchTerm)){
+            if (!name.match(matchSearchTerm)) {
                 product.hidden = true;
-            }
-            else{
+            } else {
                 foundOne = true;
             }
         });
         document.getElementById('nope').hidden = foundOne;
     }
 
-    function sort(){
+    function sort() {
         var sortValue = document.getElementById("sort").value;
-        window.location.href = "/home?sort="+sortValue;
+        window.location.href = "/home?sort=" + sortValue;
     }
 </script>
 @endsection

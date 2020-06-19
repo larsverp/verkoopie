@@ -59,12 +59,12 @@ Route::get('/user/{id}', 'UsersController@listUser')
 
 # Categories routes
 Route::get('/categories', 'CategoriesController@show')
-        ->middleware('auth')
-        ->name('categories');
+    ->middleware('auth')
+    ->name('categories');
 Route::get('/categories/{id}', 'CategoriesController@index')
-        ->middleware('auth');
+    ->middleware('auth');
 Route::get('/categories/update/{id}', 'CategoriesController@get_update')
-        ->middleware('auth');
+    ->middleware('auth');
 Route::post('categories', 'CategoriesController@create');
 Route::put('categories/{id}', 'CategoriesController@update');
 Route::delete('categories/{id}', 'CategoriesController@remove');
