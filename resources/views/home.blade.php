@@ -25,7 +25,6 @@
                         <a href="/categories/{{$category->id}}">{{$category->name}}</a> |
                     @endforeach
                 </p>
-                <a class="action" href="/product/{{$product->id}}"><i class="fa fa-arrow-circle-right"></i></a>
                 @if(Auth::user()->isAdmin)
                     <form method="post" action="product/{{$product->id}}"> 
                         @csrf
