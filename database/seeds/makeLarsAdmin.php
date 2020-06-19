@@ -7,7 +7,7 @@ class makeLarsAdmin extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     * php artisan db:seed --class=ProductTableSeeder
      * @return void
      */
     public function run()

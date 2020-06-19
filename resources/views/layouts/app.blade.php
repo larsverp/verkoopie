@@ -38,20 +38,20 @@
                         <li class="nav-item" role="presentation"><a href="{{ url('/home') }}" class="nav-link">Home</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Categorieën</a>
                             <div class="dropdown-menu" role="menu">
-                                @foreach(App\Categories::all() as $categorie)
-                                    <a class="dropdown-item" role="presentation" href="/categories/{{$category->id}}">{{$categorie->name}}</a>
+                                @foreach(App\Categories::all() as $category)
+                                    <a class="dropdown-item" role="presentation" href="/categories/{{$category->id}}">{{$category->name}}</a>
                                 @endforeach
                             </div>
                         </li>
-                        <!-- <li class="nav-item" role="presentation"><a class="nav-link" href="#">Recent</a></li> -->
                     </ul>
                     <ul class="nav navbar-nav">
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">Berichten</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Mijn account</a>
                             <div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item" role="presentation" href="{{ route('new_product') }}">Nieuwe verkoop</a>
                                 <a class="dropdown-item" role="presentation" href="{{ route('my_products') }}">Mijn producten</a>
-                                <a class="dropdown-item" role="presentation" href="#">Instellingen</a>
+                                @if(Auth::user()->isAdmin)
+                                    <a class="dropdown-item" role="presentation" href="{{ route('categories') }}">Categorieën</a>
+                                @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Uitloggen') }}
@@ -70,8 +70,8 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

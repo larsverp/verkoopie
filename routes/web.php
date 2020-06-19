@@ -1,5 +1,7 @@
 <?php
 
+use App\Categories;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,7 +54,17 @@ Route::get('/user/product', 'UsersController@list')
     ->name('my_products');
 Route::get('/user/product/{id}', 'UsersController@products')
     ->middleware('auth');
+Route::get('/user/{id}', 'UsersController@listUser')
+    ->middleware('auth');
 
 # Categories routes
+Route::get('/categories', 'CategoriesController@show')
+        ->middleware('auth')
+        ->name('categories');
 Route::get('/categories/{id}', 'CategoriesController@index')
         ->middleware('auth');
+Route::get('/categories/update/{id}', 'CategoriesController@get_update')
+        ->middleware('auth');
+Route::post('categories', 'CategoriesController@create');
+Route::put('categories/{id}', 'CategoriesController@update');
+Route::delete('categories/{id}', 'CategoriesController@remove');

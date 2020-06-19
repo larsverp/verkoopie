@@ -20,7 +20,7 @@
             <div class="col-sm-6 col-md-4 item" data-name="{{ $product->name }}"><a href="/product/{{$product->id}}"><img class="img-fluid" style="width:300px;height:260px;object-fit:cover;" src="{{$product->thumbnail}}"></a>
                 <h3 class="name">{{$product->name}} - €{{ number_format((float)$product->price, 2, '.', '') }}</h3>
                 <p class="description">{{ substr($product->description, 0,  250)."..." }}</p>
-                <p>
+                <p> |
                     @foreach($product->getCategories() as $category)
                         <a href="/categories/{{$category->id}}">{{$category->name}}</a> |
                     @endforeach

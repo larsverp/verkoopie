@@ -24,4 +24,10 @@ class Products extends Model
     public function getCategories(){
         return Categories::find(cat_pro::where('product_id', $this->id)->pluck('category_id'))->all();
     }
+
+    public function hasThisCategory($id){
+        return count(cat_pro::where('product_id', $this->id)
+                ->where('category_id', $id)
+                ->get());
+    }
 }

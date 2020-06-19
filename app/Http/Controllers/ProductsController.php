@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Products;
+use App\User;
 use App\Http\Requests;
 use App\Categories;
-use App\Services\CreateProductService;
+use App\Services\ProductService;
 use App\Services\SortProductService;
 use PhpParser\Node\Stmt\Catch_;
 
@@ -17,7 +18,7 @@ class ProductsController extends Controller
 
     public function __construct() {
         $this->middleware('auth');
-        $this->productService = new CreateProductService();
+        $this->productService = new ProductService();
         $this->productSort = new SortProductService();
     }
 
@@ -26,7 +27,8 @@ class ProductsController extends Controller
     }
 
     public function index($id) {
-        return view('product', ['product'=>Products::findOrFail($id)]);
+        $product = Products::findOrFail($id);
+        return view('product', ['product'=>$product, 'user'=>User::where('id', $product->seller)->first()]);
     }
 
     public function create(Requests\CreateProductRequest $request) {
@@ -58,10 +60,7 @@ class ProductsController extends Controller
     }
 
     public function update(Requests\UpdateProductRequest $request){
-        $product = Products::findOrFail($request->get('id'));
-        if($product->belongsToMe()){
-            $product->update($request->all());
-            return redirect()->route('my_products');
-        }
+        $this->productService->update($request);
+        return redirect('/user/product');
     }
 }
